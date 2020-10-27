@@ -83,8 +83,10 @@ val_ds = tf.keras.preprocessing.image_dataset_from_directory(
   seed=123,
   image_size=(img_height, img_width))
 
-trainX = train_ds
-testX = val_ds
+trainX = tf.data.Dataset.from_tensor_slices(train_ds)
+testX = tf.data.Dataset.from_tensor_slices(val_ds)
+# trainX = train_ds
+# testX = val_ds
 # ((trainX, _), (testX, _)) = mnist.load_data()
 
 # add a channel dimension to every image in the dataset, then scale
