@@ -53,8 +53,41 @@ INIT_LR = 1e-3
 BS = 32
 
 # load the MNIST dataset
-print("[INFO] loading MNIST dataset...")
-((trainX, _), (testX, _)) = mnist.load_data()
+print("[INFO] loading dataset...")
+
+import numpy as np
+import os
+import PIL
+import pathlib
+import PIL.Image
+import tensorflow as tf
+import tensorflow_datasets as tfds
+
+batch_size = 2
+img_height = 180
+img_width = 180
+
+data_dir = '/content/bioxtronomy/data'
+
+train_ds = tf.keras.preprocessing.image_dataset_from_directory(
+  data_dir,
+  validation_split=0.2,
+  subset="training",
+  seed=123,
+  image_size=(img_height, img_width),
+  batch_size=batch_size)
+
+val_ds = tf.keras.preprocessing.image_dataset_from_directory(
+  data_dir,
+  validation_split=0.2,
+  subset="validation",
+  seed=123,
+  image_size=(img_height, img_width),
+  batch_size=batch_size)
+
+trainX = train_ds
+testX = val_ds
+# ((trainX, _), (testX, _)) = mnist.load_data()
 
 # add a channel dimension to every image in the dataset, then scale
 # the pixel intensities to the range [0, 1]
