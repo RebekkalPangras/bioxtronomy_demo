@@ -123,7 +123,7 @@ for sample in train_batch:
     img_path = train_path + sample
     x = image.load_img(img_path)
     # preprocessing if required
-    x_train.append(x)
+    x_train.append(np.array(x))
 
 test_path = '/content/bioxtronomy/data/test/astronomy/'
 test_batch = os.listdir(test_path)
@@ -133,11 +133,11 @@ for sample in test_batch:
     img_path = test_path + sample
     x = image.load_img(img_path)
     # preprocessing if required
-    x_test.append(x)
+    x_test.append(np.array(x))
 
 # finally converting list into numpy array
-# x_train = np.array(x_train)
-# x_test = np.array(x_test)
+x_train = np.array(x_train)
+x_test = np.array(x_test)
 
 # add a channel dimension to every image in the dataset, then scale
 # the pixel intensities to the range [0, 1]
