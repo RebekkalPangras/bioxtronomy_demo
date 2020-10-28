@@ -138,14 +138,14 @@ for sample in test_batch:
     x_test.append(img_array)
 
 # finally converting list into numpy array
-x_train = np.array(x_train)
-x_test = np.array(x_test)
+trainX = np.array(x_train)
+testX = np.array(x_test)
 
 # add a channel dimension to every image in the dataset, then scale
 # the pixel intensities to the range [0, 1]
-trainX = np.expand_dims(x_train, axis=-1)
-print(trainX.shape)
-testX = np.expand_dims(x_test, axis=-1)
+# trainX = np.expand_dims(x_train, axis=-1)
+# print(trainX.shape)
+# testX = np.expand_dims(x_test, axis=-1)
 trainX = trainX.astype("float32") / 255.0
 testX = testX.astype("float32") / 255.0
 
