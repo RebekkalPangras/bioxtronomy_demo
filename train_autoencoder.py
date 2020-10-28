@@ -51,7 +51,7 @@ args = vars(ap.parse_args())
 
 # initialize the number of epochs to train for, initial learning rate,
 # and batch size
-EPOCHS = 20
+EPOCHS = 5
 INIT_LR = 1e-3
 BS = 2
 
@@ -120,6 +120,8 @@ print("[INFO] building autoencoder...")
 autoencoder = ConvAutoencoder.build(28, 28, 1)
 opt = Adam(lr=INIT_LR, decay=INIT_LR / EPOCHS)
 autoencoder.compile(loss="mse", optimizer=opt)
+
+print("Started Training!")
 
 # train the convolutional autoencoder
 H = autoencoder.fit(
