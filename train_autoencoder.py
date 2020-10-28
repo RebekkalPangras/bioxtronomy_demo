@@ -121,7 +121,7 @@ x_train = []
 # if data are in form of images
 for sample in train_batch:
     img_path = train_path + sample
-    x = image.load_img(img_path, grayscale=True)
+    x = image.load_img(img_path, color_mode="grayscale")
     img_array = img_to_array(x)
     # preprocessing if required
     x_train.append(img_array)
@@ -132,7 +132,7 @@ x_test = []
 
 for sample in test_batch:
     img_path = test_path + sample
-    x = image.load_img(img_path, grayscale=True)
+    x = image.load_img(img_path, color_mode="grayscale")
     img_array = img_to_array(x)
     # preprocessing if required
     x_test.append(img_array)
