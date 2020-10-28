@@ -76,11 +76,16 @@ img_width = 180
 
 ...
 # load and iterate training dataset
-trainX = datagen.flow_from_directory('/content/bioxtronomy/data/train')
+trainX = datagen.flow_from_directory('/content/bioxtronomy/data/train',
+                                     batch_size=2,
+                                     class_mode=None
+                                     )
 # # load and iterate validation dataset
 # val_it = datagen.flow_from_directory('data/validation/', class_mode='binary', batch_size=64)
 # load and iterate test dataset
-testX = datagen.flow_from_directory('/content/bioxtronomy/data/test')
+testX = datagen.flow_from_directory('/content/bioxtronomy/data/test',
+                                     batch_size=2,
+                                     class_mode=None)
 # data_dir = '/content/bioxtronomy/data'
 #
 # train_ds = tf.keras.preprocessing.image_dataset_from_directory(
@@ -127,21 +132,21 @@ H = autoencoder.fit(
 # testing images, construct the visualization, and then save it
 # to disk
 print("[INFO] making predictions...")
-# decoded = autoencoder.predict(testX)
-# vis = visualize_predictions(decoded, testX)
-# cv2.imwrite(args["vis"], vis)
+decoded = autoencoder.predict(testX)
+vis = visualize_predictions(decoded, testX)
+cv2.imwrite(args["vis"], vis)
 
 # construct a plot that plots and saves the training history
-# N = np.arange(0, EPOCHS)
-# plt.style.use("ggplot")
-# plt.figure()
-# plt.plot(N, H.history["loss"], label="train_loss")
-# plt.plot(N, H.history["val_loss"], label="val_loss")
-# plt.title("Training Loss and Accuracy")
-# plt.xlabel("Epoch #")
-# plt.ylabel("Loss/Accuracy")
-# plt.legend(loc="lower left")
-# plt.savefig(args["plot"])
+N = np.arange(0, EPOCHS)
+plt.style.use("ggplot")
+plt.figure()
+plt.plot(N, H.history["loss"], label="train_loss")
+plt.plot(N, H.history["val_loss"], label="val_loss")
+plt.title("Training Loss and Accuracy")
+plt.xlabel("Epoch #")
+plt.ylabel("Loss/Accuracy")
+plt.legend(loc="lower left")
+plt.savefig(args["plot"])
 
 # serialize the autoencoder model to disk
 print("[INFO] saving autoencoder...")
