@@ -111,7 +111,7 @@ import tensorflow_datasets as tfds
 import os
 import numpy as np
 from keras.preprocessing import image
-
+from keras.preprocessing.image import img_to_array
 # PATH = os.getcwd()
 
 train_path = '/content/bioxtronomy/data/train/bio/'
@@ -121,9 +121,10 @@ x_train = []
 # if data are in form of images
 for sample in train_batch:
     img_path = train_path + sample
-    x = image.load_img(img_path)
+    x = image.load_img(img_path, grayscale=True)
+    img_array = img_to_array(x)
     # preprocessing if required
-    x_train.append(np.array(x))
+    x_train.append(img_array)
 
 test_path = '/content/bioxtronomy/data/test/astronomy/'
 test_batch = os.listdir(test_path)
@@ -131,9 +132,10 @@ x_test = []
 
 for sample in test_batch:
     img_path = test_path + sample
-    x = image.load_img(img_path)
+    x = image.load_img(img_path, grayscale=True)
+    img_array = img_to_array(x)
     # preprocessing if required
-    x_test.append(np.array(x))
+    x_test.append(img_array)
 
 # finally converting list into numpy array
 x_train = np.array(x_train)
