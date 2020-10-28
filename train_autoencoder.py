@@ -119,8 +119,7 @@ autoencoder.compile(loss="mse", optimizer=opt)
 H = autoencoder.fit(
     trainX, trainX,
     validation_data=(testX, testX),
-    epochs=EPOCHS,
-    batch_size=BS)
+    epochs=EPOCHS)
 
 # use the convolutional autoencoder to make predictions on the
 # testing images, construct the visualization, and then save it
