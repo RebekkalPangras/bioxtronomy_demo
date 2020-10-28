@@ -75,11 +75,11 @@ img_width = 180
 
 ...
 # load and iterate training dataset
-trainX = datagen.flow_from_directory('/content/bioxtronomy/data', batch_size=3)
+trainX = datagen.flow_from_directory('/content/bioxtronomy/data/train')
 # # load and iterate validation dataset
 # val_it = datagen.flow_from_directory('data/validation/', class_mode='binary', batch_size=64)
 # load and iterate test dataset
-# testX = datagen.flow_from_directory('/content/bioxtronomy/data/astronomy')
+testX = datagen.flow_from_directory('/content/bioxtronomy/data/test')
 # data_dir = '/content/bioxtronomy/data'
 #
 # train_ds = tf.keras.preprocessing.image_dataset_from_directory(
@@ -118,7 +118,7 @@ autoencoder.compile(loss="mse", optimizer=opt)
 # train the convolutional autoencoder
 H = autoencoder.fit(
     trainX, trainX,
-    # validation_data=(testX, testX),
+    validation_data=(testX, testX),
     epochs=EPOCHS,
     batch_size=BS)
 
