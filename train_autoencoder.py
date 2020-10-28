@@ -77,14 +77,14 @@ img_width = 180
 ...
 # load and iterate training dataset
 trainX = datagen.flow_from_directory('/content/bioxtronomy/data/train',
-                                     batch_size=2,
+                                     # batch_size=2,
                                      class_mode=None
                                      )
 # # load and iterate validation dataset
 # val_it = datagen.flow_from_directory('data/validation/', class_mode='binary', batch_size=64)
 # load and iterate test dataset
 testX = datagen.flow_from_directory('/content/bioxtronomy/data/test',
-                                     batch_size=2,
+                                     # batch_size=2,
                                      class_mode=None)
 # data_dir = '/content/bioxtronomy/data'
 #
