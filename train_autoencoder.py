@@ -65,6 +65,7 @@ import pathlib
 import PIL.Image
 import tensorflow as tf
 import tensorflow_datasets as tfds
+from keras.preprocessing.image import ImageDataGenerator
 
 datagen = ImageDataGenerator()
 
