@@ -132,7 +132,7 @@ x_test = []
 
 for sample in test_batch:
     img_path = test_path + sample
-    x = image.load_img(img_path, color_mode="grayscale", target_size=(224,224))
+    x = image.load_img(img_path, color_mode="grayscale", target_size=(28,28))
     img_array = img_to_array(x)
     # preprocessing if required
     x_test.append(img_array)
