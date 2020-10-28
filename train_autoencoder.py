@@ -51,7 +51,7 @@ args = vars(ap.parse_args())
 
 # initialize the number of epochs to train for, initial learning rate,
 # and batch size
-EPOCHS = 5
+EPOCHS = 20
 INIT_LR = 1e-3
 BS = 2
 
@@ -141,11 +141,6 @@ for sample in test_batch:
 trainX = np.array(x_train)
 testX = np.array(x_test)
 
-# add a channel dimension to every image in the dataset, then scale
-# the pixel intensities to the range [0, 1]
-# trainX = np.expand_dims(x_train, axis=-1)
-# print(trainX.shape)
-# testX = np.expand_dims(x_test, axis=-1)
 trainX = trainX.astype("float32") / 255.0
 testX = testX.astype("float32") / 255.0
 
