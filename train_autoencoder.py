@@ -67,7 +67,8 @@ import tensorflow as tf
 import tensorflow_datasets as tfds
 from keras.preprocessing.image import ImageDataGenerator
 
-datagen = ImageDataGenerator(rescale=1./255)
+# datagen = ImageDataGenerator(rescale=1./255)
+datagen = ImageDataGenerator()
 
 batch_size = 2
 img_height = 180
@@ -104,10 +105,10 @@ testX = datagen.flow_from_directory('/content/bioxtronomy/data/test')
 
 # add a channel dimension to every image in the dataset, then scale
 # the pixel intensities to the range [0, 1]
-# trainX = np.expand_dims(trainX, axis=-1)
-# testX = np.expand_dims(testX, axis=-1)
-# trainX = trainX.astype("float32") / 255.0
-# testX = testX.astype("float32") / 255.0
+trainX = np.expand_dims(trainX, axis=-1)
+testX = np.expand_dims(testX, axis=-1)
+trainX = trainX.astype("float32") / 255.0
+testX = testX.astype("float32") / 255.0
 
 # construct our convolutional autoencoder
 print("[INFO] building autoencoder...")
@@ -119,7 +120,8 @@ autoencoder.compile(loss="mse", optimizer=opt)
 H = autoencoder.fit(
     trainX, trainX,
     validation_data=(testX, testX),
-    epochs=EPOCHS)
+    epochs=EPOCHS,
+    batch_size=BS)
 
 # use the convolutional autoencoder to make predictions on the
 # testing images, construct the visualization, and then save it
