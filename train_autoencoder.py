@@ -65,27 +65,27 @@ import pathlib
 import PIL.Image
 import tensorflow as tf
 import tensorflow_datasets as tfds
-from keras.preprocessing.image import ImageDataGenerator
-
+# from keras.preprocessing.image import ImageDataGenerator
+#
 # datagen = ImageDataGenerator(rescale=1./255)
-datagen = ImageDataGenerator()
-
-batch_size = 2
-img_height = 180
-img_width = 180
-
-...
-# load and iterate training dataset
-trainX = datagen.flow_from_directory('/content/bioxtronomy/data/train',
-                                     # batch_size=2,
-                                     class_mode=None
-                                     )
+# # datagen = ImageDataGenerator()
+#
+# batch_size = 2
+# img_height = 180
+# img_width = 180
+#
+# ...
+# # load and iterate training dataset
+# trainX = datagen.flow_from_directory('/content/bioxtronomy/data/train',
+#                                      # batch_size=2,
+#                                      class_mode=None
+#                                      )
 # # load and iterate validation dataset
 # val_it = datagen.flow_from_directory('data/validation/', class_mode='binary', batch_size=64)
 # load and iterate test dataset
-testX = datagen.flow_from_directory('/content/bioxtronomy/data/test',
-                                     # batch_size=2,
-                                     class_mode=None)
+# testX = datagen.flow_from_directory('/content/bioxtronomy/data/test',
+#                                      # batch_size=2,
+#                                      class_mode=None)
 # data_dir = '/content/bioxtronomy/data'
 #
 # train_ds = tf.keras.preprocessing.image_dataset_from_directory(
@@ -108,10 +108,41 @@ testX = datagen.flow_from_directory('/content/bioxtronomy/data/test',
 # testX = val_ds
 # ((trainX, _), (testX, _)) = mnist.load_data()
 
+import os
+import numpy as np
+from keras.preprocessing import image
+
+# PATH = os.getcwd()
+
+train_path = '/content/bioxtronomy/data/train/bio'
+train_batch = os.listdir(train_path)
+x_train = []
+
+# if data are in form of images
+for sample in train_batch:
+    img_path = train_path + sample
+    x = image.load_img(img_path)
+    # preprocessing if required
+    x_train.append(x)
+
+test_path = '/content/bioxtronomy/data/test/astronomy'
+test_batch = os.listdir(test_path)
+x_test = []
+
+for sample in test_batch:
+    img_path = test_path + sample
+    x = image.load_img(img_path)
+    # preprocessing if required
+    x_test.append(x)
+
+# finally converting list into numpy array
+x_train = np.array(x_train)
+x_test = np.array(x_test)
+
 # add a channel dimension to every image in the dataset, then scale
 # the pixel intensities to the range [0, 1]
-trainX = np.expand_dims(trainX, axis=-1)
-testX = np.expand_dims(testX, axis=-1)
+trainX = np.expand_dims(x_train, axis=-1)
+testX = np.expand_dims(x_test, axis=-1)
 trainX = trainX.astype("float32") / 255.0
 testX = testX.astype("float32") / 255.0
 
