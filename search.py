@@ -42,15 +42,51 @@ ap.add_argument("-s", "--sample", type=int, default=10,
 args = vars(ap.parse_args())
 
 # load the MNIST dataset
-print("[INFO] loading MNIST dataset...")
-((trainX, _), (testX, _)) = mnist.load_data()
+print("[INFO] loading dataset...")
+# ((trainX, _), (testX, _)) = mnist.load_data()
+
+import os
+import numpy as np
+from keras.preprocessing import image
+from keras.preprocessing.image import img_to_array
+# PATH = os.getcwd()
+
+train_path = '/content/bioxtronomy/data/train/bio/'
+train_batch = os.listdir(train_path)
+x_train = []
+
+# if data are in form of images
+for sample in train_batch:
+    img_path = train_path + sample
+    x = image.load_img(img_path, color_mode="grayscale", target_size=(28,28))
+    img_array = img_to_array(x)
+    # preprocessing if required
+    x_train.append(img_array)
+
+test_path = '/content/bioxtronomy/data/test/astronomy/'
+test_batch = os.listdir(test_path)
+x_test = []
+
+for sample in test_batch:
+    img_path = test_path + sample
+    x = image.load_img(img_path, color_mode="grayscale", target_size=(28,28))
+    img_array = img_to_array(x)
+    # preprocessing if required
+    x_test.append(img_array)
+
+# finally converting list into numpy array
+trainX = np.array(x_train)
+testX = np.array(x_test)
+
+trainX = trainX.astype("float32") / 255.0
+testX = testX.astype("float32") / 255.0
 
 # add a channel dimension to every image in the dataset, then scale
 # the pixel intensities to the range [0, 1]
-trainX = np.expand_dims(trainX, axis=-1)
-testX = np.expand_dims(testX, axis=-1)
-trainX = trainX.astype("float32") / 255.0
-testX = testX.astype("float32") / 255.0
+# trainX = np.expand_dims(trainX, axis=-1)
+# testX = np.expand_dims(testX, axis=-1)
+# trainX = trainX.astype("float32") / 255.0
+# testX = testX.astype("float32") / 255.0
 
 # load the autoencoder model and index from disk
 print("[INFO] loading autoencoder and index...")
