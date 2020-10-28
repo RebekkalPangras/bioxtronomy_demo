@@ -136,8 +136,8 @@ for sample in test_batch:
     x_test.append(x)
 
 # finally converting list into numpy array
-x_train = np.array(x_train)
-x_test = np.array(x_test)
+# x_train = np.array(x_train)
+# x_test = np.array(x_test)
 
 # add a channel dimension to every image in the dataset, then scale
 # the pixel intensities to the range [0, 1]
