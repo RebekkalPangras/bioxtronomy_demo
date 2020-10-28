@@ -75,7 +75,7 @@ img_width = 180
 
 ...
 # load and iterate training dataset
-trainX = datagen.flow_from_directory('/content/bioxtronomy/data/bio')
+trainX = datagen.flow_from_directory('/content/bioxtronomy/data')
 # # load and iterate validation dataset
 # val_it = datagen.flow_from_directory('data/validation/', class_mode='binary', batch_size=64)
 # load and iterate test dataset
@@ -105,9 +105,9 @@ testX = datagen.flow_from_directory('/content/bioxtronomy/data/astronomy')
 # add a channel dimension to every image in the dataset, then scale
 # the pixel intensities to the range [0, 1]
 trainX = np.expand_dims(trainX, axis=-1)
-testX = np.expand_dims(testX, axis=-1)
+# testX = np.expand_dims(testX, axis=-1)
 trainX = trainX.astype("float32") / 255.0
-testX = testX.astype("float32") / 255.0
+# testX = testX.astype("float32") / 255.0
 
 # construct our convolutional autoencoder
 print("[INFO] building autoencoder...")
@@ -118,7 +118,7 @@ autoencoder.compile(loss="mse", optimizer=opt)
 # train the convolutional autoencoder
 H = autoencoder.fit(
     trainX, trainX,
-    validation_data=(testX, testX),
+    # validation_data=(testX, testX),
     epochs=EPOCHS,
     batch_size=BS)
 
