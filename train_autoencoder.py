@@ -114,7 +114,7 @@ from keras.preprocessing import image
 
 # PATH = os.getcwd()
 
-train_path = '/content/bioxtronomy/data/train/bio'
+train_path = '/content/bioxtronomy/data/train/bio/'
 train_batch = os.listdir(train_path)
 x_train = []
 
@@ -125,7 +125,7 @@ for sample in train_batch:
     # preprocessing if required
     x_train.append(x)
 
-test_path = '/content/bioxtronomy/data/test/astronomy'
+test_path = '/content/bioxtronomy/data/test/astronomy/'
 test_batch = os.listdir(test_path)
 x_test = []
 
