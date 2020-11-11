@@ -121,7 +121,7 @@ x_train = []
 # if data are in form of images
 for sample in train_batch:
     img_path = train_path + sample
-    x = image.load_img(img_path, color_mode="grayscale", target_size=(28,28))
+    x = image.load_img(img_path, color_mode="grayscale", target_size=(64,64))
     img_array = img_to_array(x)
     # preprocessing if required
     x_train.append(img_array)
@@ -146,7 +146,7 @@ testX = testX.astype("float32") / 255.0
 
 # construct our convolutional autoencoder
 print("[INFO] building autoencoder...")
-autoencoder = ConvAutoencoder.build(180, 180, 1)
+autoencoder = ConvAutoencoder.build(64, 64, 1)
 opt = Adam(lr=INIT_LR, decay=INIT_LR / EPOCHS)
 autoencoder.compile(loss="mse", optimizer=opt)
 
