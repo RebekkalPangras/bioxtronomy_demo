@@ -132,7 +132,7 @@ x_test = []
 
 for sample in test_batch:
     img_path = test_path + sample
-    x = image.load_img(img_path, color_mode="grayscale", target_size=(28,28))
+    x = image.load_img(img_path, color_mode="grayscale", target_size=(180,180))
     img_array = img_to_array(x)
     # preprocessing if required
     x_test.append(img_array)
@@ -146,7 +146,7 @@ testX = testX.astype("float32") / 255.0
 
 # construct our convolutional autoencoder
 print("[INFO] building autoencoder...")
-autoencoder = ConvAutoencoder.build(28, 28, 1)
+autoencoder = ConvAutoencoder.build(180, 180, 1)
 opt = Adam(lr=INIT_LR, decay=INIT_LR / EPOCHS)
 autoencoder.compile(loss="mse", optimizer=opt)
 
